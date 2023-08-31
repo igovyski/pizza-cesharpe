@@ -13,3 +13,17 @@ C:\Users\pessoa_igor\Desktop\Pizzaria\obj\Debug\net6.0\refint\Pizzaria.dll
 C:\Users\pessoa_igor\Desktop\Pizzaria\obj\Debug\net6.0\Pizzaria.pdb
 C:\Users\pessoa_igor\Desktop\Pizzaria\obj\Debug\net6.0\Pizzaria.genruntimeconfig.cache
 C:\Users\pessoa_igor\Desktop\Pizzaria\obj\Debug\net6.0\ref\Pizzaria.dll
+D:\Igor\Área de Trabalho\pizzaria c#\bin\Debug\net6.0\Pizzaria.exe
+D:\Igor\Área de Trabalho\pizzaria c#\bin\Debug\net6.0\Pizzaria.deps.json
+D:\Igor\Área de Trabalho\pizzaria c#\bin\Debug\net6.0\Pizzaria.runtimeconfig.json
+D:\Igor\Área de Trabalho\pizzaria c#\bin\Debug\net6.0\Pizzaria.dll
+D:\Igor\Área de Trabalho\pizzaria c#\bin\Debug\net6.0\Pizzaria.pdb
+D:\Igor\Área de Trabalho\pizzaria c#\obj\Debug\net6.0\Pizzaria.GeneratedMSBuildEditorConfig.editorconfig
+D:\Igor\Área de Trabalho\pizzaria c#\obj\Debug\net6.0\Pizzaria.AssemblyInfoInputs.cache
+D:\Igor\Área de Trabalho\pizzaria c#\obj\Debug\net6.0\Pizzaria.AssemblyInfo.cs
+D:\Igor\Área de Trabalho\pizzaria c#\obj\Debug\net6.0\Pizzaria.csproj.CoreCompileInputs.cache
+D:\Igor\Área de Trabalho\pizzaria c#\obj\Debug\net6.0\Pizzaria.dll
+D:\Igor\Área de Trabalho\pizzaria c#\obj\Debug\net6.0\refint\Pizzaria.dll
+D:\Igor\Área de Trabalho\pizzaria c#\obj\Debug\net6.0\Pizzaria.pdb
+D:\Igor\Área de Trabalho\pizzaria c#\obj\Debug\net6.0\Pizzaria.genruntimeconfig.cache
+D:\Igor\Área de Trabalho\pizzaria c#\obj\Debug\net6.0\ref\Pizzaria.dll
