@@ -11,9 +11,15 @@ class Cardapio {
 
     public void ListarPizzas(){
         int i = 1;
-        foreach (Pizza pizza in CardapioPizzas){
-            Console.WriteLine($"{i} - {pizza.Sabor} - R${(pizza.Preco).ToString("N2")}");
-            i++;
+
+        if (CardapioPizzas.Count > 1){
+            foreach (Pizza pizza in CardapioPizzas){
+                Console.WriteLine($"{i} - {pizza.Sabor} - R${(pizza.Preco).ToString("N2")}");
+                i++;
+            }
+        } 
+        else {
+            Console.WriteLine("\nNão há pizzas no cardápio");
         }
     }
 

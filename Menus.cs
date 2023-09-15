@@ -1,11 +1,11 @@
 class Menu {
 
-    private Cardapio cardapio;
-    private PedidoService pedidoService;
+    private Cardapio classeCardapio;
+    private PedidoService classePedidoService;
 
     public Menu() {
-        cardapio = new Cardapio(); 
-        pedidoService = new PedidoService(cardapio);
+        classeCardapio = new Cardapio(); 
+        classePedidoService = new PedidoService(classeCardapio);
     }
 
     public void MenuInicial(){
@@ -15,7 +15,8 @@ class Menu {
         Console.WriteLine("2 - Listar Pizzas");
         Console.WriteLine("3 - Criar Novo Pedido");
         Console.WriteLine("4 - Listar Pedidos");
-        Console.WriteLine("5 - Sair");
+        Console.WriteLine("5 - Pagar Pedido");
+        Console.WriteLine("6 - Sair");
     }
 
     public void MenuAdicionarPizza(){
@@ -24,12 +25,12 @@ class Menu {
         string sabor = Console.ReadLine();
         Console.WriteLine("Digite o preco da pizza (XX,XX):");
         double preco = double.Parse(Console.ReadLine());
-        cardapio.AdicionarPizza(sabor, preco);
+        classeCardapio.AdicionarPizza(sabor, preco);
     }
 
     public void MenuListarPizza(){
         Console.WriteLine("\nListar pizzas");
-        cardapio.ListarPizzas();
+        classeCardapio.ListarPizzas();
     }
 
     public void MenuNovoPedido(){
@@ -47,14 +48,40 @@ class Menu {
         */
 
         List<Pizza> ListaPizzas = new List<Pizza>();
-        pedidoService.AddPizzasPedido(ListaPizzas);
+        classePedidoService.AddPizzasPedido(ListaPizzas);
 
-        pedidoService.NovoPedido(nome, telefone, ListaPizzas);
+        if (ListaPizzas.Count > 0){
+            classePedidoService.NovoPedido(nome, telefone, ListaPizzas);
+        }
+        else {
+            Console.WriteLine("Pedido sem pizzas, faça um novo pedido.");
+        }
 
     }
 
     public void MenuListarPedidos(){
-        pedidoService.ListarTodosPedidos();
+        classePedidoService.ListarTodosPedidos();
+    }
+
+    public void MenuPagarPedido(){
+        Console.WriteLine("Qual pedido deseja pagar?");
+        int i = 1;
+        foreach (var pedido in classePedidoService.ListaPedidos){
+            Console.WriteLine($"#{i} - Cliente: {pedido.Nome} - Falta: R${(pedido.FaltaPagar).ToString("N2")}");
+            i++;
+        }
+
+        int escolhaPedido = int.Parse(Console.ReadLine()) - 1;
+        
+        if (escolhaPedido >= 0 && escolhaPedido < classePedidoService.ListaPedidos.Count && classePedidoService.ListaPedidos[escolhaPedido].StatusPagamento == "NÃO") {
+            Pedido pedidoParaPagar = classePedidoService.ListaPedidos[escolhaPedido];
+            classePedidoService.PagarPedido(pedidoParaPagar);
+        } 
+        else {
+            Console.WriteLine("Escolha outro pedido.");
+        }
+        
+
     }
 
 }

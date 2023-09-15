@@ -1,9 +1,11 @@
-class PedidoService {
-    private Cardapio cardapio;
-    private List<Pedido> ListaPedidos = new List<Pedido>();
+using Microsoft.VisualBasic;
 
-    public PedidoService(Cardapio cardapio) {
-        this.cardapio = cardapio;
+class PedidoService {
+    private Cardapio classeCardapio;
+    public List<Pedido> ListaPedidos = new List<Pedido>();
+
+    public PedidoService(Cardapio classeCardapio) {
+        this.classeCardapio = classeCardapio;
     }
 
     public void AddPizzasPedido(List<Pizza> ListaPizzas){
@@ -12,10 +14,15 @@ class PedidoService {
 
         while(addPizza){
             Console.WriteLine("Escolha uma pizza para adicionar:");
-            cardapio.ListarPizzas();
-            int escolha = int.Parse(Console.ReadLine());
+            classeCardapio.ListarPizzas();
+            int escolha = int.Parse(Console.ReadLine()) -1;
 
-            ListaPizzas.Add(new Pizza {Sabor = cardapio.CardapioPizzas[escolha-1].Sabor, Preco = cardapio.CardapioPizzas[escolha-1].Preco});
+            if (escolha >= 0 && escolha <= classeCardapio.CardapioPizzas.Count){
+                ListaPizzas.Add(new Pizza {Sabor = classeCardapio.CardapioPizzas[escolha].Sabor, Preco = classeCardapio.CardapioPizzas[escolha].Preco});
+            } 
+            else {
+                Console.WriteLine("Opção inválida");
+            }
 
             Console.WriteLine("\nDeseja escolher outra pizza?\n1 - Sim | 2 - Não");
             int maisPizza = int.Parse(Console.ReadLine());
@@ -51,14 +58,63 @@ class PedidoService {
     }
 
     public void ListarTodosPedidos(){
-        foreach (var pedido in ListaPedidos){
-            Console.WriteLine($"\nCliente: {pedido.Nome} - {pedido.Telefone}");
-            Console.WriteLine($"Pizzas do Pedido:");
-            foreach (var pizza in pedido.PizzasPedido){
-                Console.WriteLine($"{pizza.Sabor} - R${(pizza.Preco).ToString("N2")}");
+        int i = 1;
+        if (ListaPedidos.Count > 0){
+            foreach (var pedido in ListaPedidos){
+                Console.WriteLine($"\nPEDIDO {i}");
+                Console.WriteLine($"Cliente: {pedido.Nome} - {pedido.Telefone}");
+                Console.WriteLine($"Pizzas do Pedido:");
+                foreach (var pizza in pedido.PizzasPedido){
+                    Console.WriteLine($"{pizza.Sabor} - R${(pizza.Preco).ToString("N2")}");
+                }
+                Console.WriteLine($"Total: R${(pedido.Total).ToString("N2")}");
+                Console.WriteLine($"Quanto falta para pagar: R${(pedido.FaltaPagar).ToString("N2")}");
+                Console.WriteLine($"Pago: {pedido.StatusPagamento}");
+                i++;
             }
-            Console.WriteLine($"Total: R${(pedido.Total).ToString("N2")}");
         }
+        else {
+            Console.WriteLine("\nNão há pedidos");
+        }
+    }
+
+    public void PagarPedido(Pedido pedidoParaPagar){
+        Console.WriteLine("ESCOLHA A FORMA DE PAGAMENTO:");
+        Console.WriteLine("1 - Dinheiro");
+        Console.WriteLine("2 - Cartão de Débito");
+        Console.WriteLine("3 - Vale-Refeição");
+        
+        int escolha = int.Parse(Console.ReadLine());
+        string formaPagamento = "";
+        switch(escolha){
+            case 1:
+                formaPagamento = "DINHEIRO";
+                break;
+            case 2:
+                formaPagamento = "CARTÃO DE DÉBITO";
+                break;
+            case 3:
+                formaPagamento = "VALE-REFEIÇÃO";
+                break;
+            default:
+                Console.WriteLine("Digite uma forma de pagamento válida");
+                break;
+        }
+        Console.WriteLine("Qual o valor:");
+        double valorPago = double.Parse(Console.ReadLine());
+        if (valorPago <= pedidoParaPagar.FaltaPagar && formaPagamento != "DINHEIRO"){
+            pedidoParaPagar.EfetuarPagamento(valorPago, formaPagamento);
+            Console.WriteLine($"IF {formaPagamento}");
+        } 
+        else if (formaPagamento == "DINHEIRO") {
+            Console.WriteLine($"ELSE IF {formaPagamento}");
+            pedidoParaPagar.EfetuarPagamento(valorPago, formaPagamento);
+        }
+        else {
+            Console.WriteLine($"ELSE {formaPagamento}");
+            Console.WriteLine($"Com o {formaPagamento} você só pode pagar um valor menor ou igual do que falta ser pago.");
+        }
+        
     }
 
 }

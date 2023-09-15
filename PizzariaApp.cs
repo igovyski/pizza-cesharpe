@@ -31,6 +31,10 @@ class PizzariaApp {
                     break;
 
                 case 5:
+                    menu.MenuPagarPedido();
+                    break;
+
+                case 6:
                     exit = true;
                     break;
 
